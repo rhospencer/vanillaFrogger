@@ -23,6 +23,9 @@ let down = true
 let right = true
 let left = true
 
+// car variables
+let car1 = new Image(); car1.src = 'car1.png'
+
 document.addEventListener("keydown", keyDownHandler, false)
 document.addEventListener("keyup", keyUpHandler, false)
 
@@ -72,10 +75,10 @@ function drawBackground() {
     ctx.stroke()
     
     ctx.beginPath()
-    ctx.strokeStyle = "white"
+    ctx.strokeStyle = "yellow"
     ctx.moveTo(0, 350)
     ctx.lineTo(570, 350)
-    ctx.setLineDash([5])
+    ctx.setLineDash([0])
     ctx.strokeWidth = 2
     ctx.stroke()
     
@@ -96,15 +99,12 @@ function drawFrog() {
     ctx.drawImage(frog, sx, sy, swidth, sheight, x, y, width, height)
 }
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    drawBackground()
-    drawFrog()
-
+function moveFrog() {
     // move up
     if (upPressed === true && up === true) {
         y = y - 44
         up = false
+        sx = 0
     }
     if (upPressed === false) {
         up = true
@@ -114,6 +114,7 @@ function draw() {
     if (downPressed === true && down === true) {
         y = y + 44
         down = false
+        sx = 0
     }
     if (downPressed === false) {
         down = true
@@ -123,6 +124,7 @@ function draw() {
     if (rightPressed === true && right === true) {
         x = x + 44
         right = false
+
     }
     if (rightPressed === false) {
         right = true
@@ -136,7 +138,18 @@ function draw() {
     if (leftPressed === false) {
         left = true
     }
+}
 
+function drawCar1() {
+    ctx.drawImage(car1, 0, 0, 47, 35, 100, 400, 47, 35)
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawBackground()
+    drawFrog()
+    moveFrog()
+    drawCar1()
 
     requestAnimationFrame(draw)
 }
