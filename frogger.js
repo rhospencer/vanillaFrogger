@@ -24,7 +24,25 @@ let right = true
 let left = true
 
 // car variables
-let car1 = new Image(); car1.src = 'car1.png'
+let car1_1 = new Image(); car1_1.src = 'car1.png'
+let car1X1 = 100
+let car1_2 = new Image(); car1_2.src = 'car1.png'
+let car1X2 = 500
+let car2_1 = new Image(); car2_1.src = 'car2.png'
+let car2X1 = 150
+let car2_2 = new Image(); car2_2.src = 'car2.png'
+let car2X2 = 400
+let car2_3 = new Image(); car2_3.src = 'car2.png'
+let car2X3 = 650
+let car3_1 = new Image(); car3_1.src = 'car3.png'
+let car3X1 = 500
+let truck1_1 = new Image(); truck1_1.src = 'truck1.png'
+let truck1X1 = 450
+let truck1_2 = new Image(); truck1_2.src = 'truck1.png'
+let truck1X2 = 310
+let truck1_3 = new Image(); truck1_3.src = 'truck1.png'
+let truck1X3 = 10
+
 
 document.addEventListener("keydown", keyDownHandler, false)
 document.addEventListener("keyup", keyUpHandler, false)
@@ -101,7 +119,7 @@ function drawFrog() {
 
 function moveFrog() {
     // move up
-    if (upPressed === true && up === true) {
+    if (upPressed === true && up === true && y > 20) {
         y = y - 44
         up = false
         sx = 0
@@ -111,7 +129,7 @@ function moveFrog() {
     }
 
     // move down
-    if (downPressed === true && down === true) {
+    if (downPressed === true && down === true && y + height < canvas.height - 80) {
         y = y + 44
         down = false
         sx = 0
@@ -121,7 +139,7 @@ function moveFrog() {
     }
 
     // right move
-    if (rightPressed === true && right === true) {
+    if (rightPressed === true && right === true && x + width < canvas.width - 20) {
         x = x + 44
         right = false
 
@@ -131,7 +149,7 @@ function moveFrog() {
     }
 
     // left move
-    if (leftPressed === true && left === true) {
+    if (leftPressed === true && left === true && x > 20) {
         x = x - 44
         left = false
     }
@@ -140,8 +158,70 @@ function moveFrog() {
     }
 }
 
-function drawCar1() {
-    ctx.drawImage(car1, 0, 0, 47, 35, 100, 400, 47, 35)
+function drawLane1() {
+    ctx.drawImage(car1_1, 0, 0, 47, 35, car1X1, 400, 47, 35)
+    if (car1X1 < canvas.width + 100) {
+        car1X1 = car1X1 + 4
+    } else {
+        car1X1 = -100
+    }
+    ctx.drawImage(car1_2, 0, 0, 47, 35, car1X2, 400, 47, 35)
+    if (car1X2 < canvas.width + 100) {
+        car1X2 = car1X2 + 4
+    } else {
+        car1X2 = -100
+    }
+}
+
+function drawLane2() {
+    ctx.drawImage(car2_1, 0, 0, 35, 35, car2X1, 355, 35, 35)
+    if (car2X1 < canvas.width + 100) {
+        car2X1 = car2X1 + 2
+    } else {
+        car2X1 = -100
+    }
+    ctx.drawImage(car2_2, 0, 0, 35, 35, car2X2, 355, 35, 35)
+    if (car2X2 < canvas.width + 100) {
+        car2X2 = car2X2 + 2
+    } else {
+        car2X2 = -100
+    }
+    ctx.drawImage(car2_3, 0, 0, 35, 35, car2X3, 355, 35, 35)
+    if (car2X3 < canvas.width + 100) {
+        car2X3 = car2X3 + 2
+    } else {
+        car2X3 = -100
+    }
+}
+
+function drawLane3() {
+    ctx.drawImage(car3_1, 0, 0, 35, 35, car3X1, 310, 35, 35)
+    if (car3X1 > canvas.width - 670) {
+        car3X1 = car3X1 - 8
+    } else {
+        car3X1 = 670
+    }
+}
+
+function drawLane4() {
+    ctx.drawImage(truck1_1, 0, 0, 108, 35, truck1X1, 265, 108, 35)
+    if (truck1X1 > canvas.width - 670) {
+        truck1X1 = truck1X1 - 1
+    } else {
+        truck1X1 = 670
+    }
+    ctx.drawImage(truck1_2, 0, 0, 108, 35, truck1X2, 265, 108, 35)
+    if (truck1X2 > canvas.width - 670) {
+        truck1X2 = truck1X2 - 1
+    } else {
+        truck1X2 = 670
+    }
+    ctx.drawImage(truck1_3, 0, 0, 108, 35, truck1X3, 265, 108, 35)
+    if (truck1X3 > canvas.width - 670) {
+        truck1X3 = truck1X3 - 1
+    } else {
+        truck1X3 = 670
+    }
 }
 
 function draw() {
@@ -149,7 +229,10 @@ function draw() {
     drawBackground()
     drawFrog()
     moveFrog()
-    drawCar1()
+    drawLane1()
+    drawLane2()
+    drawLane3()
+    drawLane4()
 
     requestAnimationFrame(draw)
 }
